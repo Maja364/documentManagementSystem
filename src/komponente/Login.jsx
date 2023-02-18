@@ -86,12 +86,12 @@ function Login() {
             <form id="waterform" onSubmit={handleLogin} >
             
             <div className="formgroup" id="name-form">
-                <label for="email">Your name*</label>
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" onInput={handleInput} />
             </div>
             
             <div className="formgroup" id="email-form">
-                <label for="password">Your e-mail*</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" onInput={handleInput}/>
             </div>
             
