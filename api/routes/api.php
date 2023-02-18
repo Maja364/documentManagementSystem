@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AutfController;
+use App\Http\Controllers\DokumentController;
+use App\Http\Controllers\FileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::post("/register",[AutfController::class,'register']);
+Route::post("/login",[AutfController::class,'login']);
+
+
+Route::get('/dokument', [DokumentController::class, 'index']);
+
+Route::get('/files', [FileController::class, 'index'])->name('files');
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+ 
+    Route::post('/dokument', [FileController::class, 'upload'])->name('files');   
+
+ 
+
+    
+    Route::post("/logout",[AutfController::class,'logout']);
+
+});
+
+Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){  
+
+
+ 
+
+    Route::put("/dokument/{id}",[DokumentController::class,'update']);
+
+    Route::delete("/dokument/{id}",[DokumentController::class,'destroy']);
+    Route::post("/logout",[AutfController::class,'logout']);
+
+
+
 });
