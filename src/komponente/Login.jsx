@@ -61,7 +61,7 @@ function Login() {
                          navigate("/admin")
                     }
                     else{
-                        navigate("/zadaci"); 
+                        navigate("/dokumenta"); 
                     }
 
 

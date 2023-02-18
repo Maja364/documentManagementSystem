@@ -31,9 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
  
     Route::post('/dokument', [FileController::class, 'upload'])->name('files');   
 
- 
-
-    
+  
     Route::post("/logout",[AutfController::class,'logout']);
 
 });
@@ -46,7 +44,8 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){
     Route::put("/dokument/{id}",[DokumentController::class,'update']);
 
     Route::delete("/dokument/{id}",[DokumentController::class,'destroy']);
-    Route::post("/logout",[AutfController::class,'logout']);
+    
+    Route::post("/logoutAdmin",[AutfController::class,'logout']);
 
 
 
