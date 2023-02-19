@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-function Admin() {
+function Admin({dokumenta}) {
  
     const navigate = useNavigate();
  
@@ -50,11 +50,40 @@ function Admin() {
   
       }); 
     }
- 
+    function vratiLink(fileName){
+      return "http://127.0.0.1:8000/uploads/"+fileName
+    }
     return ( 
     <>
         <div className="container">
             <button className='btn btn-primary' onClick={handleLogout}> Odjavi se</button>
+
+
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Autor</th>
+                  <th scope="col">Fajl</th>
+                  <th scope="col">Godina izdanja</th>
+                  <th scope="col">Opis</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                    {
+
+                      dokumenta.map((d)=><tr key={d.id}>
+                        <td>{d.id}</td>
+                        <td>{d.autor.ime}  {d.autor.prezime}</td>
+                        <td><a href={  vratiLink(d.file.file_name)} target="_blank" rel="noopener noreferrer" style={{color:"white"}}>otvori</a></td>
+                        <td>{d.godina_izdanja}</td>
+                        <td>{d.opis}</td>
+
+                      </tr>)
+                    }
+              </tbody>
+              </table>
         </div>
   
     </>

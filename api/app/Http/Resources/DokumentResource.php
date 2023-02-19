@@ -20,6 +20,8 @@ class DokumentResource extends JsonResource
             'id' => $this->id,
             'autor' => Autor::find($this->autor_id),           
             'godina_izdanja' => $this->godina_izdanja,
+            'opis' => $this->opis,
+
             'file' => File::find($this->file_id),
              
         ];
