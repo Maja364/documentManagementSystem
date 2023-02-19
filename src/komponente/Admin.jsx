@@ -90,6 +90,31 @@ function Admin({dokumenta}) {
       });
       setSortedDocuments(sorted);
     }
+    function obrisi(id){
+      axios
+      .delete("http://127.0.0.1:8000/api/dokument/"+id,
+      {headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`} } )
+      .then((res)=>{  
+          console.log(res.data);
+          alert("OBRISANO")
+      })
+      .catch(function (error) {
+          if (error.response) {
+            // Request made and server responded
+            console.log(error.response.data);
+            
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+          }
+      
+        });
+    }
     return ( 
     <>
         <div className="container">
@@ -107,6 +132,7 @@ function Admin({dokumenta}) {
                   <th scope="col">Fajl</th>
                   <th scope="col"  ></th>
                   <th scope="col">Opis</th>
+                  <th scope="col">Opcije</th>
 
                 </tr>
               </thead>
@@ -119,6 +145,8 @@ function Admin({dokumenta}) {
                     <td><a href={vratiLink(d.file.file_name)} target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>otvori</a></td>
                     <td>{d.godina_izdanja}</td>
                     <td>{d.opis}</td>
+                    <td><button className='btn btn-danger' onClick={()=>obrisi(d.id)}>Obrisi</button></td>
+
                   </tr>
                 ))
               }

@@ -21,8 +21,8 @@ class FileController extends Controller
  
         $validator = Validator::make($request->all(),
             [
-                'files' => 'required',
-                'files.*' => 'required|mimetypes:application/pdf,application/msword,application/vnd.ms-excel|max:2048',
+                'files' => '',
+                'files.*' => '|mimetypes:application/pdf,application/msword,application/vnd.ms-excel|max:2048',
                 'godina_izdanja' => 'required|integer', 
                 'opis' => 'required|string|max:300',                 
                 'autor_id' => 'required|integer|exists:autors,id', 

@@ -72,12 +72,21 @@ function Dodaj() {
 
         e.preventDefault(); 
         
+        const data = new FormData();
+        for (let i = 0; i < fajlovi.length; i++) {
+            data.append("files[]", fajlovi[i]);
+        }
+      
+
+        data.append("godina_izdanja",dokumentdata.godina_izdanja);
+        data.append("autor_id",sessionStorage.getItem("auth_id"));
+        data.append("opis",dokumentdata.opis);
 
  
         var config = {
             method: 'post',
             url: 'http://127.0.0.1:8000/api/dokument',
-            data:dokumentdata,
+            data:data,
             headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`},
           };
        
