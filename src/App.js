@@ -6,6 +6,7 @@ import Dokumenta from './komponente/Dokumenta';
 import Admin from './komponente/Admin';
 import axios from "axios";
 import { useEffect, useState } from 'react';
+import Dodaj from './komponente/Dodaj';
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
@@ -36,6 +37,8 @@ function App() {
  
       <Routes>
         <Route path="/" element={<Login ></Login>}></Route>
+        <Route path="/dokumenta/dodaj" element={<Dodaj ></Dodaj>}></Route>
+
         <Route path="/dokumenta" element={<Dokumenta ></Dokumenta>}></Route>
         <Route path="/admin" element={<Admin dokumenta={dokumenta}></Admin>}></Route>
       

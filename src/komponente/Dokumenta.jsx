@@ -50,10 +50,14 @@ function Dokumenta() {
   
       }); 
     }
- 
+    function dodaj(){
+      navigate('dodaj')
+    }
     return ( 
     <>
         <div className="container">
+          <button className='btn btn-primary' onClick={dodaj}> Dodaj</button>
+
             <button className='btn btn-primary' onClick={handleLogout}> Odjavi se</button>
         </div>
   
