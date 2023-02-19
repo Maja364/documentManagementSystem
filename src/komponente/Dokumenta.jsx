@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-function Dokumenta() {
- 
+function Dokumenta({radovi}) {
+  console.log(radovi)
     const navigate = useNavigate();
  
     function handleLogout(){ 
@@ -53,12 +53,38 @@ function Dokumenta() {
     function dodaj(){
       navigate('dodaj')
     }
+
+
     return ( 
     <>
         <div className="container">
           <button className='btn btn-primary' onClick={dodaj}> Dodaj</button>
-
             <button className='btn btn-primary' onClick={handleLogout}> Odjavi se</button>
+
+            {radovi.map((d)=>
+              <div key={d.id} className="card">
+              <div className="card-body">
+                <h5 className="card-title">{d.title}</h5>
+                <h6 className="card-subtitle mb-2 text-muted">
+                  Autor: {d.authors[0].name}
+                </h6>
+                <p className="card-text">
+                  Subject: {d.subject[0] }
+                </p>
+                <a
+                  href={"http://openlibrary.org" + d.key}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-link"
+                >
+                  Link do rada
+                </a>
+              </div>
+            </div>
+            )}
+
+
+
         </div>
   
     </>

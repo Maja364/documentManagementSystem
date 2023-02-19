@@ -14,6 +14,7 @@ const axiosInstance = axios.create({
 function App() {
 
   const [dokumenta,setDokumenta] = useState([ ])
+  const [radovi,setRadovi] = useState([ ])
 
   useEffect(() => {
     const getDokumenta = async () => {
@@ -32,6 +33,22 @@ function App() {
     getDokumenta();
   }, [ axiosInstance]);
 
+  useEffect(() => {
+    const getRadovi = async () => {
+      try {
+        const res = await axiosInstance.get(  "https://openlibrary.org/subjects/it.json?limit=10",
+          
+        );
+        console.log(res)
+        setRadovi(res.data.works);
+        
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRadovi();
+  }, [ axiosInstance]);
+
   const [dokumentIzmena,setDokumentIzmena] = useState(null)
 
   return (
@@ -42,7 +59,7 @@ function App() {
 
         <Route path="/dokumenta/dodaj" element={<Dodaj ></Dodaj>}></Route>
 
-        <Route path="/dokumenta" element={<Dokumenta ></Dokumenta>}></Route>
+        <Route path="/dokumenta" element={<Dokumenta radovi={radovi}></Dokumenta>}></Route>
         <Route path="/admin/izmeni" element={<Izmeni dok={dokumentIzmena}></Izmeni>}></Route>
 
         <Route path="/admin" element={<Admin dokumenta={dokumenta} setDokumentIzmena={setDokumentIzmena}></Admin>}></Route>
