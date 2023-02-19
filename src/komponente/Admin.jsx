@@ -82,35 +82,46 @@ function Admin({dokumenta}) {
         }
       }
     }
+
+    const [sortedDocuments, setSortedDocuments] = useState(dokumenta);
+    const sortByYear = () => {
+      const sorted = [...sortedDocuments].sort((a, b) => {
+        return a.godina_izdanja - b.godina_izdanja;
+      });
+      setSortedDocuments(sorted);
+    }
     return ( 
     <>
         <div className="container">
+          <button className='btn btn-success' onClick={sortByYear}> Sortiraj</button>
+
             <button className='btn btn-primary' onClick={handleLogout}> Odjavi se</button>
+
             <input type="text"  id="searchInput" onChange={searchTable}/>
 
-            <table class="table table-dark" >
+            <table className="table table-dark" >
               <thead>
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Autor</th>
                   <th scope="col">Fajl</th>
-                  <th scope="col">Godina izdanja</th>
+                  <th scope="col"  ></th>
                   <th scope="col">Opis</th>
 
                 </tr>
               </thead>
               <tbody id="myTable">
-                    {
-
-                      dokumenta.map((d)=><tr key={d.id}>
-                        <td>{d.id}</td>
-                        <td>{d.autor.ime}  {d.autor.prezime}</td>
-                        <td><a href={  vratiLink(d.file.file_name)} target="_blank" rel="noopener noreferrer" style={{color:"white"}}>otvori</a></td>
-                        <td>{d.godina_izdanja}</td>
-                        <td>{d.opis}</td>
-
-                      </tr>)
-                    }
+              {
+                sortedDocuments.map((d) => (
+                  <tr key={d.id}>
+                    <td>{d.id}</td>
+                    <td>{d.autor.ime} {d.autor.prezime}</td>
+                    <td><a href={vratiLink(d.file.file_name)} target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>otvori</a></td>
+                    <td>{d.godina_izdanja}</td>
+                    <td>{d.opis}</td>
+                  </tr>
+                ))
+              }
               </tbody>
               </table>
         </div>
