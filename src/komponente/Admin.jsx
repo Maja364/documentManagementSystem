@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-function Admin({dokumenta}) {
+function Admin({dokumenta,setDokumentIzmena}) {
  
     const navigate = useNavigate();
  
@@ -115,6 +115,10 @@ function Admin({dokumenta}) {
       
         });
     }
+    function azuriraj(d){
+      setDokumentIzmena(d)
+      navigate('izmeni')
+    }
     return ( 
     <>
         <div className="container">
@@ -146,6 +150,7 @@ function Admin({dokumenta}) {
                     <td>{d.godina_izdanja}</td>
                     <td>{d.opis}</td>
                     <td><button className='btn btn-danger' onClick={()=>obrisi(d.id)}>Obrisi</button></td>
+                    <td><button className='btn btn-danger' onClick={()=>azuriraj(d)}>Azuriraj</button></td>
 
                   </tr>
                 ))

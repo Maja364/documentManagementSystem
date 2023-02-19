@@ -7,6 +7,7 @@ import Admin from './komponente/Admin';
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import Dodaj from './komponente/Dodaj';
+import Izmeni from './komponente/Izmeni';
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
@@ -31,16 +32,20 @@ function App() {
     getDokumenta();
   }, [ axiosInstance]);
 
+  const [dokumentIzmena,setDokumentIzmena] = useState(null)
 
   return (
       <BrowserRouter  >
  
       <Routes>
         <Route path="/" element={<Login ></Login>}></Route>
+
         <Route path="/dokumenta/dodaj" element={<Dodaj ></Dodaj>}></Route>
 
         <Route path="/dokumenta" element={<Dokumenta ></Dokumenta>}></Route>
-        <Route path="/admin" element={<Admin dokumenta={dokumenta}></Admin>}></Route>
+        <Route path="/admin/izmeni" element={<Izmeni dok={dokumentIzmena}></Izmeni>}></Route>
+
+        <Route path="/admin" element={<Admin dokumenta={dokumenta} setDokumentIzmena={setDokumentIzmena}></Admin>}></Route>
       
       
       </Routes>
